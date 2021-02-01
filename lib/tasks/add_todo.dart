@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:todoey/tasks/rounded_well.dart';
+import 'package:provider/provider.dart';
 
-import 'Task.dart';
+import 'task.dart';
 
 class AddTodoFab extends StatelessWidget {
-  AddTodoFab({@required this.onAdd});
-  final void Function(Task task) onAdd;
-
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
@@ -19,9 +17,7 @@ class AddTodoFab extends StatelessWidget {
             padding: EdgeInsets.only(
               bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-            child: AddTodoModal(
-              onAdd: this.onAdd,
-            ),
+            child: AddTodoModal(),
           ),
         ),
       ),
@@ -35,8 +31,9 @@ class AddTodoFab extends StatelessWidget {
 }
 
 class AddTodoModal extends StatelessWidget {
-  AddTodoModal({@required this.onAdd});
-  final void Function(Task task) onAdd;
+  void add(context, Task task) {
+    Provider.of<TaskListModel>(context, listen: false).add(task);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +69,13 @@ class AddTodoModal extends StatelessWidget {
               color: Colors.lightBlueAccent,
               textColor: Colors.white,
               onPressed: () {
-                this.onAdd(Task(
-                  text: text,
-                  isChecked: false,
-                ));
+                add(
+                  context,
+                  Task(
+                    text: text,
+                    isChecked: false,
+                  ),
+                );
                 controller.clear();
                 Navigator.of(context).pop();
               },
