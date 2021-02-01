@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-class TasksHeading extends StatefulWidget {
-  @override
-  _TasksHeadingState createState() => _TasksHeadingState();
-}
+class TasksHeading extends StatelessWidget {
+  TasksHeading({@required this.taskCount, @required this.remainingCount});
+  final int taskCount;
+  final int remainingCount;
 
-class _TasksHeadingState extends State<TasksHeading> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,7 +27,7 @@ class _TasksHeadingState extends State<TasksHeading> {
             ),
           ),
           Text(
-            '12 Tasks',
+            '${this.remainingCount} / ${this.taskCount} Tasks remaining',
             style: TextStyle(
               color: Colors.white,
               fontSize: 18.0,

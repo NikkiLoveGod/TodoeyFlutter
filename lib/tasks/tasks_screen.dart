@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoey/tasks/Task.dart';
 import 'package:todoey/tasks/tasks_list.dart';
 
 import 'add_todo.dart';
@@ -10,6 +11,12 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
+  final List<Task> tasks = [
+    Task(text: 'moi', isChecked: false),
+    Task(text: 'yolo', isChecked: true),
+    Task(text: 'swag', isChecked: true),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,15 +29,32 @@ class _TasksScreenState extends State<TasksScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TasksHeading(),
-                  TasksList(),
+                  TasksHeading(
+                    remainingCount:
+                        this.tasks.where((Task t) => !t.isChecked).length,
+                    taskCount: this.tasks.length,
+                  ),
+                  TasksList(
+                    tasks: this.tasks,
+                    onChange: (task, value) {
+                      return this.setState(() {
+                        task.toggleChecked();
+                      });
+                    },
+                  ),
                 ],
               ),
             ],
           ),
         ),
       ),
-      floatingActionButton: AddTodoButton(),
+      floatingActionButton: AddTodoFab(
+        onAdd: (task) {
+          setState(() {
+            this.tasks.add(task);
+          });
+        },
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

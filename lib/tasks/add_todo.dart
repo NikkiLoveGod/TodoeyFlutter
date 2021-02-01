@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:todoey/tasks/rounded_well.dart';
 
-class AddTodoButton extends StatelessWidget {
+import 'Task.dart';
+
+class AddTodoFab extends StatelessWidget {
+  AddTodoFab({@required this.onAdd});
+  final void Function(Task task) onAdd;
+
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
@@ -14,7 +19,9 @@ class AddTodoButton extends StatelessWidget {
             padding: EdgeInsets.only(
               bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-            child: AddTodoModal(),
+            child: AddTodoModal(
+              onAdd: this.onAdd,
+            ),
           ),
         ),
       ),
@@ -28,8 +35,14 @@ class AddTodoButton extends StatelessWidget {
 }
 
 class AddTodoModal extends StatelessWidget {
+  AddTodoModal({@required this.onAdd});
+  final void Function(Task task) onAdd;
+
   @override
   Widget build(BuildContext context) {
+    final TextEditingController controller = TextEditingController();
+    String text;
+
     return RoundedWell(
       child: Padding(
         padding: const EdgeInsets.all(30.0),
@@ -48,13 +61,24 @@ class AddTodoModal extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: TextField(),
+              child: TextField(
+                controller: controller,
+                onChanged: (value) => text = value,
+                autofocus: true,
+              ),
             ),
             RaisedButton(
               elevation: 5.0,
               color: Colors.lightBlueAccent,
               textColor: Colors.white,
-              onPressed: () => {},
+              onPressed: () {
+                this.onAdd(Task(
+                  text: text,
+                  isChecked: false,
+                ));
+                controller.clear();
+                Navigator.of(context).pop();
+              },
               child: Text('Add task'),
             ),
           ],
