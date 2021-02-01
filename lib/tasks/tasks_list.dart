@@ -17,6 +17,7 @@ class TasksList extends StatelessWidget {
               text: taskList.get(index).text,
               isChecked: taskList.get(index).isChecked,
               onChange: (value) => taskList.toggle(index),
+              onLongPress: () => taskList.delete(index),
             ),
           ),
         ),
@@ -30,14 +31,18 @@ class TodoItem extends StatelessWidget {
     @required this.isChecked,
     @required this.text,
     @required this.onChange,
+    @required this.onLongPress,
   });
   final bool isChecked;
   final String text;
   final Function onChange;
+  final Function onLongPress;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () => this.onChange(!this.isChecked),
+      onLongPress: () => this.onLongPress(),
       title: Text(
         this.text,
         style: TextStyle(

@@ -34,4 +34,9 @@ class TaskListModel extends ChangeNotifier {
   Task get(int index) {
     return this._tasks[index];
   }
+
+  void delete(int index) {
+    this._tasks.removeAt(index);
+    notifyListeners();
+  }
 }
