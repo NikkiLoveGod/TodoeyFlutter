@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:todoey/home/body.dart';
-import 'package:todoey/home/heading.dart';
+import 'package:todoey/tasks/tasks_list.dart';
 
 import 'add_todo.dart';
+import 'tasks_heading.dart';
 
-class HomeScreen extends StatefulWidget {
+class TasksScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _TasksScreenState createState() => _TasksScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _TasksScreenState extends State<TasksScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Heading(),
-                  Body(),
+                  TasksHeading(),
+                  TasksList(),
                 ],
               ),
             ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todoey/home/rounded_well.dart';
+import 'package:todoey/tasks/rounded_well.dart';
 
-class Body extends StatelessWidget {
+class TasksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(

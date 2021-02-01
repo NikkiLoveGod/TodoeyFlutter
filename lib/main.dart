@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todoey/home/home_screen.dart';
+import 'package:todoey/tasks/tasks_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeScreen(),
+      home: TasksScreen(),
     );
   }
 }

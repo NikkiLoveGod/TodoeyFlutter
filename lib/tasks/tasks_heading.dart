@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Heading extends StatefulWidget {
+class TasksHeading extends StatefulWidget {
   @override
-  _HeadingState createState() => _HeadingState();
+  _TasksHeadingState createState() => _TasksHeadingState();
 }
 
-class _HeadingState extends State<Heading> {
+class _TasksHeadingState extends State<TasksHeading> {
   @override
   Widget build(BuildContext context) {
     return Padding(
